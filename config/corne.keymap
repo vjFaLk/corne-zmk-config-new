@@ -14,6 +14,25 @@
 		
 		default_layer {
 			
+                        /*
+                         * Keymap Layout:
+                         * 
+                         * Layer 0 (Base Layer):
+                         * ┌───────────┬─────┬─────┬─────┬─────┬─────┐             ┌─────┬─────┬─────┬─────┬─────┬───────────┐
+                         * │           │ TAB │  Q  │  W  │  E  │  R  │             │  T  │  Y  │  U  │  I  │  O  │  BACKSPACE │
+                         * ├───────────┼─────┼─────┼─────┼─────┼─────┤             ├─────┼─────┼─────┼─────┼─────┼───────────┤
+                         * │ Left Ctrl │  A  │  S  │  D  │  F  │  G  │             │  H  │  J  │  K  │  L  │  ;  │     '     │
+                         * ├───────────┼─────┼─────┼─────┼─────┼─────┤             ├─────┼─────┼─────┼─────┼─────┼───────────┤
+                         * │ Left Shift│  Z  │  X  │  C  │  V  │  B  │             │  N  │  M  │  ,  │  .  │  /  │ RShift+ESC │
+                         * ├───────────┼─────┼─────┼─────────────────┤             ├─────────────────┼─────┼─────┼───────────┤
+                         * │ Left Alt  │ MO2 │           SPACE       │             │  RET │ MO1 │ RGUI │
+                         * └───────────┴─────┴───────────────────────┘             └─────────────────┴─────┴─────┘
+                         * 
+                         * Legend:
+                         * - `&kp <key>`: Sends a key press for the specified key.
+                         * - `&mo <layer>`: Momentarily activates the specified layer while held.
+                         * - `&mt <mod> <key>`: Sends the key when tapped, or acts as the modifier when held.
+                         */
 			bindings = <
 			&kp TAB   &kp Q &kp W &kp E &kp R &kp T   &kp Y &kp U  &kp I     &kp O   &kp P    &kp BSPC
 			&kp LCTRL &kp A &kp S &kp D &kp F &kp G   &kp H &kp J  &kp K     &kp L   &kp SEMI &kp SQT
@@ -21,6 +40,26 @@
 			&kp LALT &mo 2 &kp SPACE   &kp RET &mo 1 &kp RIGHT_GUI
 			>;
 		};
+                /*
+                 * Keymap Layer: Lower Layer
+                 * This layer is designed for a split Corne (CRKBD) keyboard.
+                 * 
+                 * Layer Layout:
+                 * ┌─────┬─────┬─────┬─────┬─────┬─────┐             ┌─────┬─────┬─────┬─────┬─────┬─────┐
+                 * │ TAB │  1  │  2  │  3  │  4  │  5  │             │  6  │  7  │  8  │  9  │  0  │ BSPC│
+                 * ├─────┼─────┼─────┼─────┼─────┼─────┤             ├─────┼─────┼─────┼─────┼─────┼─────┤
+                 * │ F1  │ F2  │ F3  │ F4  │ F5  │ F6  │             │     │LEFT │DOWN │ UP  │RIGHT│     │
+                 * ├─────┼─────┼─────┼─────┼─────┼─────┤             ├─────┼─────┼─────┼─────┼─────┼─────┤
+                 * │ F7  │ F8  │ F9  │ F10 │ F11 │ F12 │             │     │HOME │PGDN │PGUP │ END │     │
+                 * ├─────┼─────┼─────┼─────────────────┤             ├─────────────────┼─────┼─────┼─────┤
+                 * │ LALT│ MO3 │         SPACE         │             │  RET│     │     │
+                 * └─────┴─────┴───────────────────────┘             └─────────────────┴─────┴─────┘
+                 * 
+                 * Notes:
+                 * - The `trans` keyword represents a transparent key, which falls through to the lower layer.
+                 * - The `mo 3` key activates Layer 3 momentarily while held.
+                 * - This layout is optimized for navigation and function key access on the lower layer.
+                 */
 		lower_layer {
 			
 			bindings = <
@@ -31,6 +70,26 @@
 			>;
 		};
 		
+                /*
+                 * Raise Layer Keymap for Split Corne Keyboard (CRKBD)
+                 *
+                 * ┌───────┬───────┬───────┬───────┬───────┬───────┐            ┌───────┬───────┬───────┬───────┬───────┬───────┐
+                 * │  TAB  │   !   │   @   │   #   │   $   │   %   │            │   ^   │   &   │   *   │   (   │   )   │  DEL  │
+                 * ├───────┼───────┼───────┼───────┼───────┼───────┤            ├───────┼───────┼───────┼───────┼───────┼───────┤
+                 * │ LCTRL │ BTCLR │ BTSEL0│       │       │       │            │   -   │   =   │   [   │   ]   │   \   │   `   │
+                 * ├───────┼───────┼───────┼───────┼───────┼───────┤            ├───────┼───────┼───────┼───────┼───────┼───────┤
+                 * │ LSHFT │       │       │       │       │       │            │   _   │   +   │   {   │   }   │   |   │   ~   │
+                 * ├───────┴───────┴───────┼───────┼───────┼───────┤            ├───────┼───────┼───────┴───────┴───────┴───────┤
+                 * │      Studio Unlock    │ SPACE │  RET  │ MO(3) │            │ RGUI  │
+                 * └────────────────────────┴───────┴───────┴───────┘            └───────┘
+                 *
+                 * Legend:
+                 * - BTCLR: Clear Bluetooth pairing
+                 * - BTSEL0: Select Bluetooth profile 0
+                 * - Studio Unlock: Custom key action (likely specific to your setup)
+                 * - MO(3): Momentary switch to layer 3
+                 * - RGUI: Right GUI (Windows/Command) key
+                 */
 		raise_layer {
 			
 			bindings = <
@@ -41,6 +100,27 @@
 			>;
 		};
 		
+                /*
+                 * Keymap for the adjust_layer on a split Corne (crkbd) keyboard.
+                 * This layer is typically used for system adjustments, Bluetooth controls, and special characters.
+                 * 
+                 * Layout:
+                 * 
+                 * ┌──────────┬──────────┬──────────┬──────────┬──────────┬──────────┐             ┌──────────┬──────────┬──────────┬──────────┬──────────┬──────────┐
+                 * │ &bt BT_CLR │ &bt BT_SEL 0 │ &bt BT_SEL 1 │ &bt BT_SEL 2 │ &bt BT_SEL 3 │ &bt BT_SEL 4 │             │ &kp CARET│ &kp AMPS │ &kp KP_MULTIPLY │ &kp LPAR │ &kp RPAR │ &kp BSPC │
+                 * ├──────────┼──────────┼──────────┼──────────┼──────────┼──────────┤             ├──────────┼──────────┼──────────┼──────────┼──────────┼──────────┤
+                 * │ &trans    │ &trans    │ &trans    │ &trans    │ &trans    │ &trans    │             │ &kp MINUS│ &kp EQUAL│ &kp LBKT │ &kp RBKT │ &kp BSLH │ &kp GRAVE │
+                 * ├──────────┼──────────┼──────────┼──────────┼──────────┼──────────┤             ├──────────┼──────────┼──────────┼──────────┼──────────┼──────────┤
+                 * │ &trans    │ &trans    │ &trans    │ &trans    │ &trans    │ &trans    │             │ &kp UNDER│ &kp PLUS │ &kp LBRC │ &kp RBRC │ &kp PIPE │ &kp TILDE │
+                 * ├──────────┼──────────┼──────────┼──────────┼──────────┼──────────┤             ├──────────┼──────────┼──────────┼──────────┼──────────┼──────────┤
+                 * │ &kp LALT  │ &trans    │ &kp SPACE│ &kp RET  │ &trans    │ &kp RIGHT_GUI │             │ &kp LALT │ &trans    │ &kp SPACE│ &kp RET  │ &trans    │ &kp RIGHT_GUI │
+                 * └──────────┴──────────┴──────────┴──────────┴──────────┴──────────┘             └──────────┴──────────┴──────────┴──────────┴──────────┴──────────┘
+                 * 
+                 * Notes:
+                 * - The left-hand side contains Bluetooth controls for clearing and selecting devices.
+                 * - The right-hand side contains special characters and navigation keys.
+                 * - The bottom row includes modifiers and space/enter keys for both hands.
+                 */
 		adjust_layer {
 			
 			bindings = <
